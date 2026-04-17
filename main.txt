@@ -1,0 +1,6 @@
+[test]
+arch = x86_64, aarch64
+os = linux
+cmd_begin
+echo "succes"
+cmd_end
