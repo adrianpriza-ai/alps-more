@@ -3,4 +3,37 @@ arch = x86_64, aarch64
 os = linux
 cmd_begin
 echo "succes"
+sudo echo "sudo test"
+echo "succes2"
+sudo echo "test"
 cmd_end
+
+[archlinuxcn@arch]
+desc = Setup archlinuxcn repository
+arch = x86_64, aarch64
+os = arch
+deps = curl
+sudo = true
+
+cmd_begin
+curl -fsSL https://moreland.codeberg.page/alps-more/archlinuxcn/archlinuxcn-install.sh | bash
+cmd_end
+
+remove_begin
+curl -fsSL https://moreland.codeberg.page/alps-more/archlinuxcn/archlinuxcn-remove.sh | bash
+remove_end
+
+[chaotic-aur@arch]
+desc = Setup archlinuxcn repository
+arch = x86_64, aarch64
+os = arch
+deps = curl
+sudo = true
+
+cmd_begin
+curl -fsSL https://moreland.codeberg.page/alps-more/chaotic-aur/chaotic-aur-install.sh | bash
+cmd_end
+
+remove_begin
+curl -fsSL https://moreland.codeberg.page/alps-more/chaotic-aur/chaotic-aur-remove.sh | bash
+remove_end
