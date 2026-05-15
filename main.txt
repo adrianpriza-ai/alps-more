@@ -16,11 +16,11 @@ deps = curl
 sudo = true
 
 cmd_begin
-curl -fsSL https://moreland.codeberg.page/alps-more/archlinuxcn/archlinuxcn-install.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/archlinuxcn/archlinuxcn-install.sh | bash
 cmd_end
 
 remove_begin
-curl -fsSL https://moreland.codeberg.page/alps-more/archlinuxcn/archlinuxcn-remove.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/archlinuxcn/archlinuxcn-remove.sh | bash
 remove_end
 
 [chaotic-aur@arch]
@@ -31,9 +31,9 @@ deps = curl
 sudo = true
 
 cmd_begin
-curl -fsSL https://moreland.codeberg.page/alps-more/chaotic-aur/chaotic-aur-install.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/chaotic-aur/chaotic-aur-install.sh | bash
 cmd_end
 
 remove_begin
-curl -fsSL https://moreland.codeberg.page/alps-more/chaotic-aur/chaotic-aur-remove.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/chaotic-aur/chaotic-aur-remove.sh | bash
 remove_end
