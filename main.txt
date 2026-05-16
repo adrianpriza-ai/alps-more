@@ -8,7 +8,12 @@ echo "succes2"
 sudo echo "test"
 cmd_end
 
-[archlinuxcn@arch]
+remove_begin
+echo "remove"
+sudo echo "sudo remove"
+remove_end
+
+[archlinuxcn]
 desc = Setup archlinuxcn repository
 arch = x86_64, aarch64
 os = arch
@@ -23,8 +28,8 @@ remove_begin
 curl -fsSL https://adrianpriza-ai.github.io/alps-more/archlinuxcn/archlinuxcn-remove.sh | bash
 remove_end
 
-[chaotic-aur@arch]
-desc = Setup archlinuxcn repository
+[chaotic-aur]
+desc = Setup Chaotic-aur repository
 arch = x86_64, aarch64
 os = arch
 deps = curl
