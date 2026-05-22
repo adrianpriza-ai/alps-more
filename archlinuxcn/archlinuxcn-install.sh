@@ -28,14 +28,17 @@ grep '^Server' "$TMP" \
         curl \
             -o /dev/null \
             -s \
+            -f \
             -w "%{time_total}" \
             --connect-timeout 3 \
             --max-time 8 \
-            "${test_url}/core/os/${ARCH}/core.db" \
-        2>/dev/null || echo "999"
+            "${test_url}/archlinuxcn.db" \
+        2>/dev/null
     )
 
-    echo "${speed}|${raw}"
+    if [[ -n "$speed" ]]; then
+        echo "${speed}|${raw}"
+    fi
 
 done \
 | sort -t'|' -k1,1g \
