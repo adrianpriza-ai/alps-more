@@ -32,14 +32,14 @@ grep '^Server' "$TMP" \
             -w "%{time_total}" \
             --connect-timeout 3 \
             --max-time 8 \
-            "${test_url}/${ARCH}/" \
+            "${test_url}/chaotic-aur.db" \
         2>/dev/null || echo "999"
     )
 
-    echo "$speed|$raw"
+    echo "${speed}|${raw}"
 
 done \
-| sort -n \
+| sort -t'|' -k1,1g \
 | head -n "$TOP" > "${TMP}.sorted"
 
 echo
