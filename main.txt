@@ -19,14 +19,13 @@ arch = x86_64, aarch64
 os = arch
 deps = curl
 sudo = true
-servers = https://adrianpriza-ai.github.io/alps-more/, https://moreland.codeberg.page/alps-more/
 
 cmd_begin
-curl -fsSL {server}archlinuxcn/archlinuxcn-install.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/archlinuxcn/archlinuxcn-install.sh | bash
 cmd_end
 
 remove_begin
-curl -fsSL {server}archlinuxcn/archlinuxcn-remove.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/archlinuxcn/archlinuxcn-remove.sh | bash
 remove_end
 
 [chaotic-aur]
@@ -35,14 +34,13 @@ arch = x86_64, aarch64
 os = arch
 deps = curl
 sudo = true
-servers = https://adrianpriza-ai.github.io/alps-more/, https://moreland.codeberg.page/alps-more/
 
 cmd_begin
-curl -fsSL {server}chaotic-aur/chaotic-aur-install.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/chaotic-aur/chaotic-aur-install.sh | bash
 cmd_end
 
 remove_begin
-curl -fsSL {server}chaotic-aur/chaotic-aur-remove.sh | bash
+curl -fsSL https://adrianpriza-ai.github.io/alps-more/chaotic-aur/chaotic-aur-remove.sh | bash
 remove_end
 
 [alps]
