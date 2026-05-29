@@ -19,6 +19,7 @@ arch = x86_64, aarch64
 os = arch
 deps = curl
 sudo = true
+servers = https://adrianpriza-ai.github.io/alps-more/, https://moreland.codeberg.page/alps-more/
 
 cmd_begin
 curl -fsSL {server}archlinuxcn/archlinuxcn-install.sh | bash
@@ -34,6 +35,7 @@ arch = x86_64, aarch64
 os = arch
 deps = curl
 sudo = true
+servers = https://adrianpriza-ai.github.io/alps-more/, https://moreland.codeberg.page/alps-more/
 
 cmd_begin
 curl -fsSL {server}chaotic-aur/chaotic-aur-install.sh | bash
