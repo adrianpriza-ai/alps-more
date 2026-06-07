@@ -1,9 +1,11 @@
 [alps-test]
-desc       = Advanced Linux Package System — unified package manager frontendauthor     = adrianpriza-ai
+desc       = Advanced Linux Package System — unified package manager frontend
+author     = adrianpriza-ai
 version    = 0.9.7
 arch       = x86_64, aarch64, armv7l
 os         = linux, termux
 sudo       = true
+
 cmd_begin
   curl -fsSL https://alps-project.pages.dev/install.sh | sh
 cmd_end
