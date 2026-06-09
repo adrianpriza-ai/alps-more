@@ -1,5 +1,5 @@
-[alps-test]
-desc       = Advanced Linux Package System — unified package manager frontend
+[alps]
+desc       = unified package manager frontend
 author     = adrianpriza-ai
 version    = 0.9.7
 arch       = x86_64, aarch64, armv7l
@@ -13,8 +13,8 @@ upgrade_begin
   curl -fsSL https://alps-project.pages.dev/install.sh | sh
 upgrade_end
 remove_begin
-  if [ -n "$TERMUX_VERSION" ] || [ -n "$PREFIX" ]; then rm -f "$PREFIX/bin/alps" "$PREFIX/share/fish/vendor_completions.d/alps.fish" "$PREFIX/etc/bash_completion.d/alps" "$PREFIX/share/zsh/site-functions/_alps"; else sudo rm -f /usr/local/bin/alps /usr/share/bash-completion/completions/alps /usr/share/fish/vendor_completions.d/alps.fish /usr/share/zsh/site-functions/_alps; fi
+  curl -fsSL https://alps-project.pages.dev/uninstall.sh | sh
 remove_end
 purge_begin
-  if [ -n "$TERMUX_VERSION" ] || [ -n "$PREFIX" ]; then rm -rf "$PREFIX/etc/alps" "$HOME/.config/alps" "$PREFIX/var/cache/alps"; else sudo rm -rf /etc/alps "$HOME/.config/alps" /var/cache/alps; fi
+  curl -fsSL https://alps-project.pages.dev/uninstall.sh | sh -s -- --purge
 purge_end
