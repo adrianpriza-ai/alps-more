@@ -1,6 +1,7 @@
 [test]
 arch = x86_64, aarch64
 os = linux
+
 cmd_begin
 echo "succes"
 sudo echo "sudo test"
@@ -19,13 +20,14 @@ arch = x86_64, aarch64
 os = arch
 deps = curl
 sudo = true
+safety = free
 
 cmd_begin
-  {CURL_RUN}archlinuxcn/archlinuxcn-install.sh
+  {BASH_RUN} archlinuxcn/archlinuxcn-install.sh
 cmd_end
 
 remove_begin
-  {CURL_RUN}archlinuxcn/archlinuxcn-remove.sh
+  {BASH_RUN} archlinuxcn/archlinuxcn-remove.sh
 remove_end
 
 [chaotic-aur]
@@ -34,32 +36,34 @@ arch = x86_64, aarch64
 os = arch
 deps = curl
 sudo = true
+safety = free
 
 cmd_begin
-  {CURL_RUN}chaotic-aur/chaotic-aur-install.sh
+  {BASH_RUN} chaotic-aur/chaotic-aur-install.sh
 cmd_end
 
 remove_begin
-  {CURL_RUN}chaotic-aur/chaotic-aur-remove.sh
+  {BASH_RUN} chaotic-aur/chaotic-aur-remove.sh
 remove_end
 
 [alps]
 desc       = unified package manager frontend
 author     = adrianpriza-ai
-version    = 0.9.9
+version    = 1.0.0
 arch       = x86_64, aarch64, armv7l
 os         = linux, termux
 sudo       = true
+safety     = free
 
 cmd_begin
-  curl -fsSL https://alps-project.pages.dev/install.sh | sh
+  {BASH_RUN} https://alps-project.pages.dev/install.sh
 cmd_end
 upgrade_begin
-  curl -fsSL https://alps-project.pages.dev/install.sh | sh
+  {BASH_RUN} https://alps-project.pages.dev/install.sh
 upgrade_end
 remove_begin
-  curl -fsSL https://alps-project.pages.dev/uninstall.sh | sh
+  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh
 remove_end
 purge_begin
-  curl -fsSL https://alps-project.pages.dev/uninstall.sh | sh -s -- --purge
+  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh -s -- --purge
 purge_end

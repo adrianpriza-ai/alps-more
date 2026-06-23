@@ -1,20 +1,21 @@
-[alps]
+[alps test]
 desc       = unified package manager frontend
 author     = adrianpriza-ai
-version    = 0.9.7
+version    = 1.0.0
 arch       = x86_64, aarch64, armv7l
 os         = linux, termux
 sudo       = true
+safety     = free
 
 cmd_begin
-  curl -fsSL https://alps-project.pages.dev/install.sh | sh
+  {BASH_RUN} https://alps-project.pages.dev/install.sh sh
 cmd_end
 upgrade_begin
-  curl -fsSL https://alps-project.pages.dev/install.sh | sh
+  {BASH_RUN} https://alps-project.pages.dev/install.sh sh
 upgrade_end
 remove_begin
-  curl -fsSL https://alps-project.pages.dev/uninstall.sh | sh
+  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh sh
 remove_end
 purge_begin
-  curl -fsSL https://alps-project.pages.dev/uninstall.sh | sh -s -- --purge
+  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh -s -- --purge
 purge_end

@@ -2,21 +2,29 @@
 
 set -e
 
+BASE_URL="https://adrianpriza-ai.github.io/alps-more"
+LIB_URL="${BASE_URL}/lib/mirror-probe.sh"
+
 ARCH="$(uname -m)"
 TOP=5
 
 TMP="$(mktemp)"
+LIB_TMP="$(mktemp)"
 TMP_DIR=""
 
 cleanup() {
-    rm -f "$TMP" "${TMP}.sorted"
+    rm -f "$TMP" "${TMP}.sorted" "$LIB_TMP"
     if [[ -n "$TMP_DIR" && -d "$TMP_DIR" ]]; then
         rm -rf "$TMP_DIR"
     fi
 }
 trap cleanup EXIT
 
-MIRROR_URL="https://adrianpriza-ai.github.io/alps-more/archlinuxcn/archlinuxcn-mirrorlist"
+curl -fsSL "$LIB_URL" -o "$LIB_TMP"
+# shellcheck source=/dev/null
+source "$LIB_TMP"
+
+MIRROR_URL="${BASE_URL}/archlinuxcn/archlinuxcn-mirrorlist"
 
 OUTPUT="/etc/pacman.d/archlinuxcn-mirrorlist"
 
@@ -30,30 +38,19 @@ echo "[+] Benchmarking mirrors in parallel..."
 TMP_DIR="$(mktemp -d)"
 count=0
 
-grep '^Server' "$TMP" \
-| sed 's|Server = ||' \
-| while read -r raw; do
+while read -r raw; do
     count=$((count+1))
     (
         test_url="${raw//\$arch/$ARCH}"
+        probe_file="$TMP_DIR/probe-$count"
 
-        speed=$(
-            curl \
-                -o /dev/null \
-                -s \
-                -f \
-                -w "%{time_total}" \
-                --connect-timeout 3 \
-                --max-time 8 \
-                "${test_url}/archlinuxcn.db" \
-            2>/dev/null || echo "999"
-        )
-
-        if [[ -n "$speed" && "$speed" != "999" ]]; then
+        if speed=$(probe_repo_mirror "${test_url}/archlinuxcn.db" "$probe_file" 50000 gzip); then
             echo "${speed}|${raw}" > "$TMP_DIR/$count"
         fi
+
+        rm -f "$probe_file"
     ) &
-done
+done < <(grep '^Server' "$TMP" | sed 's|Server = ||')
 
 wait || true
 
@@ -105,24 +102,16 @@ if ! grep -q "^\[archlinuxcn\]" /etc/pacman.conf; then
 fi
 
 echo
-echo "[+] Initializing pacman keys..."
-
-sudo pacman-key --init
-
-echo
-echo "[+] Importing archlinuxcn key..."
-
-sudo pacman-key --recv-keys 3056513887B78AEB --keyserver keyserver.ubuntu.com || \
-sudo pacman-key --recv-keys 3056513887B78AEB --keyserver hkps://keyserver.ubuntu.com || \
-sudo pacman-key --recv-keys 3056513887B78AEB --keyserver pgp.mit.edu || \
-sudo pacman-key --recv-keys 3056513887B78AEB --keyserver keys.openpgp.org
-
-sudo pacman-key --lsign-key 3056513887B78AEB
-
-echo
 echo "[+] Installing archlinuxcn-keyring..."
 
-sudo pacman -Sy --noconfirm archlinuxcn-keyring
+# farseerfc's key ships with archlinux-keyring but can be marginal trust on new systems
+sudo pacman-key --lsign-key "farseerfc@archlinux.org" 2>/dev/null || true
+
+if ! sudo pacman -Sy --noconfirm archlinuxcn-keyring; then
+    echo "[+] Retrying after locally trusting farseerfc key..."
+    sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+    sudo pacman -Sy --noconfirm archlinuxcn-keyring
+fi
 
 echo
 echo "[+] Syncing pacman..."
