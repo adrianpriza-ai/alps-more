@@ -1,6 +1,6 @@
 [test]
 arch = x86_64, aarch64
-os = linux, termux
+os = linux
 safety = free
 
 cmd_begin
@@ -13,6 +13,20 @@ cmd_end
 remove_begin
 echo "remove"
 sudo echo "sudo remove"
+remove_end
+
+[test]
+arch = x86_64, aarch64
+os = termux
+safety = free
+
+cmd_begin
+echo "succes"
+echo "succes2"
+cmd_end
+
+remove_begin
+echo "remove"
 remove_end
 
 [archlinuxcn]
@@ -50,7 +64,7 @@ remove_end
 [alps]
 desc       = unified package manager frontend
 author     = adrianpriza-ai
-version    = 1.0.1
+version    = 1.0.2
 arch       = x86_64, aarch64, armv7l
 os         = linux, termux
 sudo       = true
