@@ -80,5 +80,5 @@ remove_begin
   {BASH_RUN} https://alps-project.pages.dev/uninstall.sh
 remove_end
 purge_begin
-  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh -s -- --purge
+  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh --purge
 purge_end
