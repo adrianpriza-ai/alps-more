@@ -64,7 +64,7 @@ remove_end
 [alps]
 desc       = unified package manager frontend
 author     = adrianpriza-ai
-version    = 1.0.2
+version    = 1.0.3
 arch       = x86_64, aarch64, armv7l
 os         = linux, termux
 sudo       = true
