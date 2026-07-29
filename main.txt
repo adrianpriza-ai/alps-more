@@ -70,14 +70,14 @@ os         = linux, termux
 safety     = free
 
 cmd_begin
-  {BASH_RUN} https://alps-project.pages.dev/install.sh
+  {BASH_RUN} https://adrianpriza-ai.github.io/alps/install.sh
 cmd_end
 upgrade_begin
-  {BASH_RUN} https://alps-project.pages.dev/install.sh
+  {BASH_RUN} https://adrianpriza-ai.github.io/alps/install.sh
 upgrade_end
 remove_begin
-  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh
+  {BASH_RUN} https://adrianpriza-ai.github.io/alps/install.sh
 remove_end
 purge_begin
-  {BASH_RUN} https://alps-project.pages.dev/uninstall.sh --purge
+  {BASH_RUN} https://adrianpriza-ai.github.io/alps/install.sh --purge
 purge_end
